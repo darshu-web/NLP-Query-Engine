@@ -12,18 +12,22 @@ Query Caching	✓ Complete	Implements intelligent query result caching
 Document Processing Pipeline	✓ Complete	Supports PDF, DOCX, TXT, and CSV files
 Loom Video Demo (5-7 min)	✓ Complete	[Insert Loom URL here]
 Performance Benchmarks	✓ Complete	Results included in submission
+
+
 🏗️ Architecture and Core Components
 Backend (FastAPI/Flask)
 Component	Responsibility	Key Features
 Schema Discovery Service	Connects to SQL database and auto-analyzes schema	Detects tables, columns, types, and foreign keys. Handles naming variations (e.g., emp, employees)
 Document Processor	Handles unstructured data ingestion	Supports multiple document types, dynamic chunking, batch embeddings
 Query Engine	Core processing pipeline	Classifies queries (SQL vs Document vs Hybrid), generates/optimizes SQL, and implements query caching with intelligent invalidation
+
 Frontend (React/Vue/JS)
 Component	UI Features
 DatabaseConnector.js	Connection form, schema visualization (tree/graph)
 DocumentUploader.js	Drag-and-drop, multi-file support, real-time progress
 QueryPanel.js	Query input with auto-suggestions and history dropdown
 ResultsView.js	Table view for SQL results, card view for documents, performance metrics display
+
 ⚙️ Setup and Installation
 Prerequisites
 
@@ -44,14 +48,14 @@ cd project/
 2. Configuration
 Create a .env file in the root directory:
 
-# Database connection string
+Database connection string
 DATABASE_URL="sqlite:///./demo_db.sqlite"
-# For PostgreSQL: "postgresql://user:pass@host:port/dbname"
+For PostgreSQL: "postgresql://user:pass@host:port/dbname"
 
-# Embedding model
+Embedding model
 EMBEDDING_MODEL="sentence-transformers/all-MiniLM-L6-v2"
 
-# Production settings
+Production settings
 CACHE_TTL_SECONDS=300
 DB_POOL_SIZE=10
 
@@ -93,6 +97,7 @@ Structured (SQL)	"Average salary by department"	Database (aggregations across ta
 Document (RAG)	"Show me performance reviews for engineers hired last year"	Documents (vector search on reviews/resumes)
 Hybrid (SQL + RAG)	"Employees with Python skills earning over $100k"	Database + Documents
 Complex Aggregation	"Top 5 highest paid employees in each department"	Database (SQL window functions/grouping)
+
 🚀 Performance and Scaling
 Feature	Implementation	Status
 Response Time	Optimized SQL + RAG retrieval	< 2s for 95% queries
@@ -103,3 +108,4 @@ Security	Validates and parameterizes queries to prevent SQL injection	Safe for p
 Complex Multi-Table Joins: Extremely complex queries may return a "query too complex" message with suggestions.
 
 Large File Limits: Document uploads limited to 10MB per file. Larger files require dedicated streaming services.
+
